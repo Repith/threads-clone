@@ -1,0 +1,3 @@
+- created a Clerk authentication
+- created basic Home page with a structure of Left/Right/Bottom/Top bars
+- added assets to public
