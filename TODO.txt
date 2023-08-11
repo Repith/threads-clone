@@ -1,3 +1,9 @@
-- created a Clerk authentication
-- created basic Home page with a structure of Left/Right/Bottom/Top bars
-- added assets to public
+- styled bars and adapted it for responsivness
+- added Clerk themes
+- created Onboarding page
+- created AccountProfile with starting form (imageHandle and onSubmit fns (!))
+- added shadcn/ui (init | form | input | textarea)
+- added zod for validations
+- updated NextConfig to handle images and rest of future patterns
+- created utils with ChatGPT (isBase64Image | formatDateString | formatThreadCount)
+- created api with uploadthing (core | route) - from uploadthing docs 
