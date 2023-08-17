@@ -117,7 +117,9 @@
 }
 
 /* Clerk Responsive fix */
-.cl-organizationSwitcherTrigger .cl-userPreview .cl-userPreviewTextContainer {
+.cl-organizationSwitcherTrigger
+  .cl-userPreview
+  .cl-userPreviewTextContainer {
   @apply max-sm:hidden;
 }
 
