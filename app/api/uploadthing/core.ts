@@ -25,7 +25,7 @@ export const ourFileRouter = {
         metadata.userId
       );
 
-      console.log("file url", file.url);
+      console.log("File url", file.url);
     }),
 } satisfies FileRouter;
 

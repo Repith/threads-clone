@@ -1,9 +1,26 @@
-- styled bars and adapted it for responsivness
-- added Clerk themes
-- created Onboarding page
-- created AccountProfile with starting form (imageHandle and onSubmit fns (!))
-- added shadcn/ui (init | form | input | textarea)
-- added zod for validations
-- updated NextConfig to handle images and rest of future patterns
-- created utils with ChatGPT (isBase64Image | formatDateString | formatThreadCount)
-- created api with uploadthing (core | route) - from uploadthing docs 
+(auth)
+- updated onboarding page (proper fetching)
+- updated auth layotu (centered Clerk dialog)
+(root)
+- created pages
+    activity
+    communities
+    create-thread
+    profile
+    search
+    thread
+- modified UI of Home page
+(api)
+- added Clerk webhook
+(components)
+- created ThreadCard | UserCard @cards
+- created Comment | PostThread @forms
+- created ProfileHeader | SearchBar | ThreadsTab @shared
+- added tabs from shadcn/ui
+(lib)
+- created community | thread @actions|models
+- created thread validation
+- modified mongoose DB connection
+
++ major UI fixes
++ setting up for Vercel deployment to connect hooks

@@ -18,6 +18,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -101,6 +102,12 @@ const AccountProfile: React.FC<AccountProfileProps> = ({
       userId: user.id,
       path: pathname,
     });
+
+    if (pathname === "/profile/edit") {
+      router.back();
+    } else {
+      router.push("/");
+    }
   };
 
   return (
@@ -146,6 +153,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({
                   }
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -166,6 +174,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -185,6 +194,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -205,6 +215,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
