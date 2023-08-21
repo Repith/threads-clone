@@ -8,14 +8,14 @@ import User from "../models/user.model";
 
 import { connectToDB } from "../mongoose";
 
-export async function createCommunity(
+export const createCommunity = async (
   id: string,
   name: string,
   username: string,
   image: string,
   bio: string,
   createdById: string // Change the parameter name to reflect it's an id
-) {
+) => {
   try {
     connectToDB();
 
@@ -47,9 +47,9 @@ export async function createCommunity(
     console.error("Error creating community:", error);
     throw error;
   }
-}
+};
 
-export async function fetchCommunityDetails(id: string) {
+export const fetchCommunityDetails = async (id: string) => {
   try {
     connectToDB();
 
@@ -73,9 +73,9 @@ export async function fetchCommunityDetails(id: string) {
     );
     throw error;
   }
-}
+};
 
-export async function fetchCommunityPosts(id: string) {
+export const fetchCommunityPosts = async (id: string) => {
   try {
     connectToDB();
 
@@ -108,9 +108,9 @@ export async function fetchCommunityPosts(id: string) {
     console.error("Error fetching community posts:", error);
     throw error;
   }
-}
+};
 
-export async function fetchCommunities({
+export const fetchCommunities = async ({
   searchString = "",
   pageNumber = 1,
   pageSize = 20,
@@ -120,7 +120,7 @@ export async function fetchCommunities({
   pageNumber?: number;
   pageSize?: number;
   sortBy?: SortOrder;
-}) {
+}) => {
   try {
     connectToDB();
 
@@ -167,12 +167,12 @@ export async function fetchCommunities({
     console.error("Error fetching communities:", error);
     throw error;
   }
-}
+};
 
-export async function addMemberToCommunity(
+export const addMemberToCommunity = async (
   communityId: string,
   memberId: string
-) {
+) => {
   try {
     connectToDB();
 
@@ -216,12 +216,12 @@ export async function addMemberToCommunity(
     );
     throw error;
   }
-}
+};
 
-export async function removeUserFromCommunity(
+export const removeUserFromCommunity = async (
   userId: string,
   communityId: string
-) {
+) => {
   try {
     connectToDB();
 
@@ -263,14 +263,14 @@ export async function removeUserFromCommunity(
     );
     throw error;
   }
-}
+};
 
-export async function updateCommunityInfo(
+export const updateCommunityInfo = async (
   communityId: string,
   name: string,
   username: string,
   image: string
-) {
+) => {
   try {
     connectToDB();
 
@@ -294,9 +294,11 @@ export async function updateCommunityInfo(
     );
     throw error;
   }
-}
+};
 
-export async function deleteCommunity(communityId: string) {
+export const deleteCommunity = async (
+  communityId: string
+) => {
   try {
     connectToDB();
 
@@ -333,4 +335,4 @@ export async function deleteCommunity(communityId: string) {
     console.error("Error deleting community: ", error);
     throw error;
   }
-}
+};

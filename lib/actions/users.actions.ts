@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 
 import User from "../models/user.model";
 import Thread from "../models/thread.model";
+import Community from "../models/community.model";
 
 interface updateUserProps {
   userId: string;
@@ -20,11 +21,10 @@ export const fetchUser = async (userId: string) => {
   try {
     connectToDB();
 
-    return await User.findOne({ id: userId });
-    // .populate({
-    //   path: "communities",
-    //   model: Community,
-    // });
+    return await User.findOne({ id: userId }).populate({
+      path: "communities",
+      model: Community,
+    });
   } catch (error: any) {
     throw new Error(
       `Failed to fetch user: ${error.message}`
@@ -77,17 +77,23 @@ export const fetchUserPosts = async (userId: string) => {
     }).populate({
       path: "threads",
       model: Thread,
-      populate: {
-        path: "children",
-        model: Thread,
-        populate: {
-          path: "author",
-          model: User,
-          select: "id name image",
+      populate: [
+        {
+          path: "community",
+          model: Community,
+          select: "name id image _id",
         },
-      },
+        {
+          path: "children",
+          model: Thread,
+          populate: {
+            path: "author",
+            model: User,
+            select: "name image id",
+          },
+        },
+      ],
     });
-
     return threads;
   } catch (error: any) {
     throw new Error(
@@ -112,14 +118,18 @@ export const fetchUsers = async ({
   connectToDB();
 
   try {
+    //Calculate the number of users to skip
     const skipAmount = (pageNumber - 1) * pageSize;
 
+    //Create a regex to search for the user
     const regex = new RegExp(searchString, "i");
 
+    //Create the query to filter users
     const query: FilterQuery<typeof User> = {
-      id: { $ne: userId },
+      id: { $ne: userId }, //Exclude the current user
     };
 
+    // If the search string is not empty, search for the user by username or name
     if (searchString.trim() !== "") {
       query.$or = [
         { username: { $regex: regex } },
