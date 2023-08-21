@@ -33,7 +33,8 @@ const LeftSidebar = () => {
               href={link.route}
               key={link.label}
               className={`leftsidebar_link ${
-                isActive && "bg-primary-500 "
+                isActive &&
+                "bg-primary-500 ease-in duration-200 "
               }`}
             >
               <Image

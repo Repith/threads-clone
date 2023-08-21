@@ -8,10 +8,10 @@ interface Props {
   username: string;
   imgUrl: string;
   bio: string;
-  type?: string;
+  type?: "User" | "Community";
 }
 
-function ProfileHeader({
+const ProfileHeader = ({
   accountId,
   authUserId,
   name,
@@ -19,7 +19,7 @@ function ProfileHeader({
   imgUrl,
   bio,
   type,
-}: Props) {
+}: Props) => {
   return (
     <div className="flex w-full flex-col justify-start">
       <div className="flex items-center justify-between">
@@ -68,6 +68,6 @@ function ProfileHeader({
       <div className="mt-12 h-0.5 w-full bg-dark-3" />
     </div>
   );
-}
+};
 
 export default ProfileHeader;

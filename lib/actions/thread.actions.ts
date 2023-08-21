@@ -1,11 +1,12 @@
 "use server";
 
-import { connectToDB } from "../mongoose";
 import { revalidatePath } from "next/cache";
 
-import Thread from "../models/thread.model";
-import User from "../models/user.model";
-import Community from "../models/community.model";
+import { connectToDB } from "@/lib/mongoose";
+
+import Thread from "@/lib/models/thread.model";
+import User from "@/lib/models/user.model";
+import Community from "@/lib/models/community.model";
 
 interface createThreadParams {
   text: string;

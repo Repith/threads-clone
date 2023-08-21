@@ -2,11 +2,11 @@
 
 import { FilterQuery, SortOrder } from "mongoose";
 
-import Community from "../models/community.model";
-import Thread from "../models/thread.model";
-import User from "../models/user.model";
+import { connectToDB } from "@/lib/mongoose";
 
-import { connectToDB } from "../mongoose";
+import Community from "@/lib/models/community.model";
+import Thread from "@/lib/models/thread.model";
+import User from "@/lib/models/user.model";
 
 export const createCommunity = async (
   id: string,
@@ -14,13 +14,15 @@ export const createCommunity = async (
   username: string,
   image: string,
   bio: string,
-  createdById: string // Change the parameter name to reflect it's an id
+  createdById: string // The unique id of the user who created the community
 ) => {
   try {
     connectToDB();
 
     // Find the user with the provided unique id
     const user = await User.findOne({ id: createdById });
+
+    console.log(user);
 
     if (!user) {
       throw new Error("User not found"); // Handle the case if the user with the id is not found
@@ -79,28 +81,29 @@ export const fetchCommunityPosts = async (id: string) => {
   try {
     connectToDB();
 
-    const communityPosts = await Community.findById(
-      id
-    ).populate({
-      path: "threads",
-      model: Thread,
-      populate: [
-        {
-          path: "author",
-          model: User,
-          select: "name image id", // Select the "name" and "_id" fields from the "User" model
-        },
-        {
-          path: "children",
-          model: Thread,
-          populate: {
+    const communityPosts = await Community.findById(id)
+      .sort({ createdAt: "descending" })
+      .populate({
+        path: "threads",
+        model: Thread,
+        options: { sort: { createdAt: "desc" } },
+        populate: [
+          {
             path: "author",
             model: User,
-            select: "image _id", // Select the "name" and "_id" fields from the "User" model
+            select: "name image id", // Select the "name" and "_id" fields from the "User" model
           },
-        },
-      ],
-    });
+          {
+            path: "children",
+            model: Thread,
+            populate: {
+              path: "author",
+              model: User,
+              select: "image _id", // Select the "name" and "_id" fields from the "User" model
+            },
+          },
+        ],
+      });
 
     return communityPosts;
   } catch (error) {

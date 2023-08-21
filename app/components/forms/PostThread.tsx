@@ -1,6 +1,7 @@
 "use client";
 
 import * as z from "zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useRouter } from "next/navigation";
@@ -19,6 +20,7 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import toast from "react-hot-toast";
 
 interface PostThreadProps {
   userId: string;
@@ -27,6 +29,9 @@ interface PostThreadProps {
 const PostThread = ({ userId }: PostThreadProps) => {
   const router = useRouter();
   const pathname = usePathname();
+
+  const [loading, setLoading] = useState(false);
+
   const { organization } = useOrganization();
 
   const form = useForm({
@@ -40,14 +45,21 @@ const PostThread = ({ userId }: PostThreadProps) => {
   const onSubmit = async (
     values: z.infer<typeof ThreadValidation>
   ) => {
-    await createThread({
-      text: values.thread,
-      author: userId,
-      communityId: organization ? organization.id : null,
-      path: pathname,
-    });
-
-    router.push("/");
+    try {
+      setLoading(true);
+      await createThread({
+        text: values.thread,
+        author: userId,
+        communityId: organization ? organization.id : null,
+        path: pathname,
+      });
+      toast.success("Thread sucessfully created!");
+      router.push("/");
+    } catch (error: any) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -61,8 +73,8 @@ const PostThread = ({ userId }: PostThreadProps) => {
           control={form.control}
           name="thread"
           render={({ field }) => (
-            <FormItem className="flex flex-col w-full gap-3">
-              <FormLabel className="text-base-semibold text-light-2">
+            <FormItem className="flex flex-col w-full gap-2">
+              <FormLabel className="text-base-semibold text-light-2 pt-2">
                 Content
               </FormLabel>
               <FormControl>
@@ -76,7 +88,11 @@ const PostThread = ({ userId }: PostThreadProps) => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="bg-primary-500">
+        <Button
+          type="submit"
+          disabled={loading}
+          className="bg-primary-500"
+        >
           Post Thread
         </Button>
       </form>

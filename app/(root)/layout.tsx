@@ -3,11 +3,14 @@ import type { Metadata } from "next";
 
 import { Inter } from "next/font/google";
 
-import "../globals.css";
-import Topbar from "../components/shared/Topbar";
-import LeftSidebar from "../components/shared/LeftSidebar";
-import RightSidebar from "../components/shared/RightSidebar";
-import Bottombar from "../components/shared/Bottombar";
+import { Toaster } from "react-hot-toast";
+
+import "@/app/globals.css";
+
+import Topbar from "@/app/components/shared/Topbar";
+import LeftSidebar from "@/app/components/shared/LeftSidebar";
+import RightSidebar from "@/app/components/shared/RightSidebar";
+import Bottombar from "@/app/components/shared/Bottombar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,7 +38,15 @@ const RootLayout = ({
             </section>
             <RightSidebar />
           </main>
-
+          <Toaster
+            toastOptions={{
+              style: {
+                borderRadius: "10px",
+                background: "#333",
+                color: "#fff",
+              },
+            }}
+          />
           <Bottombar />
         </body>
       </html>

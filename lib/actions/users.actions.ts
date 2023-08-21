@@ -1,12 +1,13 @@
 "use server";
 
-import { FilterQuery, SortOrder } from "mongoose";
-import { connectToDB } from "../mongoose";
 import { revalidatePath } from "next/cache";
+import { FilterQuery, SortOrder } from "mongoose";
 
-import User from "../models/user.model";
-import Thread from "../models/thread.model";
-import Community from "../models/community.model";
+import { connectToDB } from "@/lib/mongoose";
+
+import User from "@/lib/models/user.model";
+import Thread from "@/lib/models/thread.model";
+import Community from "@/lib/models/community.model";
 
 interface updateUserProps {
   userId: string;
@@ -43,8 +44,6 @@ export const updateUser = async ({
   connectToDB();
 
   try {
-    connectToDB();
-
     await User.findOneAndUpdate(
       { id: userId },
       {
@@ -77,6 +76,7 @@ export const fetchUserPosts = async (userId: string) => {
     }).populate({
       path: "threads",
       model: Thread,
+      options: { sort: { createdAt: "desc" } },
       populate: [
         {
           path: "community",

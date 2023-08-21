@@ -1,12 +1,12 @@
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
 
 import {
   fetchUser,
   getActivity,
 } from "@/lib/actions/users.actions";
-import Link from "next/link";
-import Image from "next/image";
 
 const ActivityPage = async () => {
   const user = await currentUser();

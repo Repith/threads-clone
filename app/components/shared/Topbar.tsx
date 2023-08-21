@@ -36,6 +36,7 @@ const Topbar = () => {
             </SignOutButton>
           </SignedIn>
         </div>
+
         <OrganizationSwitcher
           appearance={{
             baseTheme: dark,

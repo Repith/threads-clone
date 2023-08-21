@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { fetchPosts } from "@/lib/actions/thread.actions";
 import { fetchUser } from "@/lib/actions/users.actions";
 
-import ThreadCard from "../components/cards/ThreadCard";
+import ThreadCard from "@/app/components/cards/ThreadCard";
 
 const Home = async () => {
   const result = await fetchPosts(1, 30);

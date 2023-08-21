@@ -6,10 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useRouter } from "next/navigation";
 
 import { CommentValidation } from "@/lib/validations/thread";
-import {
-  addCommentToThread,
-  createThread,
-} from "@/lib/actions/thread.actions";
+import { addCommentToThread } from "@/lib/actions/thread.actions";
 
 import {
   Form,
@@ -17,7 +14,6 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

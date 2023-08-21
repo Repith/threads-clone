@@ -58,6 +58,11 @@ const ProfilePage = async ({
                     {userInfo?.threads?.length}
                   </p>
                 )}
+                {tab.label === "Replies" && (
+                  <p className="ml-1 rounded-sm bg-light-4 px-2 py-1 !text-tiny-medium text-light-2">
+                    {userInfo?.threads?.length}
+                  </p>
+                )}
               </TabsTrigger>
             ))}
           </TabsList>

@@ -1,2 +1,11 @@
-- created thread actions (deleteThread | fetchAllChildThreads)
-- updated user actions to handle communities
+- avoid spamming with a thread creation for each new post
+- adding Clerk Images to organization that don't have one
+
+
+
+- created Pagination | CommunityCard component
+- created Community page, and Communities search page
+- added Alert Dialog from shadcnUI
+- added Threads delete functionality
+- updated proper importing pattern
+- updated for proper threads sorting
