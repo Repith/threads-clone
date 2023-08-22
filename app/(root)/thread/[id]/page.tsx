@@ -1,13 +1,12 @@
 import { redirect } from "next/navigation";
 import { currentUser } from "@clerk/nextjs";
+import Link from "next/link";
 
 import { fetchUser } from "@/lib/actions/users.actions";
 import { fetchThreadById } from "@/lib/actions/thread.actions";
 
 import ThreadCard from "@/app/components/cards/ThreadCard";
 import Comment from "@/app/components/forms/Comment";
-
-export const revalidate = 0;
 
 const ThreadPage = async ({
   params,
@@ -27,22 +26,25 @@ const ThreadPage = async ({
   return (
     <section className="relative">
       <div>
-        <ThreadCard
-          id={thread._id}
-          currentUserId={user.id}
-          parentId={thread.parentId}
-          content={thread.text}
-          author={thread.author}
-          community={thread.community}
-          createdAt={thread.createdAt}
-          comments={thread.children}
-        />
+        <Link href={`/thread/${thread._id}`}>
+          <ThreadCard
+            id={thread._id}
+            currentUserId={user.id}
+            parentId={thread.parentId}
+            content={thread.text}
+            author={thread.author}
+            community={thread.community}
+            createdAt={thread.createdAt}
+            comments={thread.children}
+            editedAt={thread.editedAt}
+          />
+        </Link>
       </div>
 
       <div className="mt-7">
         <Comment
           threadId={params.id}
-          currentUserImg={user.imageUrl}
+          currentUserImg={userInfo.image}
           currentUserId={JSON.stringify(userInfo._id)}
         />
       </div>
@@ -59,6 +61,7 @@ const ThreadPage = async ({
             community={childItem.community}
             createdAt={childItem.createdAt}
             comments={childItem.children}
+            editedAt={childItem.editedAt}
             isComment
           />
         ))}

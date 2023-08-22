@@ -1,9 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { formatDateString } from "@/lib/utils";
+import {
+  formatDateString,
+  timeSinceLastPost,
+} from "@/lib/utils";
 
 import DeleteThread from "@/app/components/forms/DeleteThread";
+import EditThread from "@/app/components/forms/EditThread";
+
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 
 interface ThreadCardProps {
   id: string;
@@ -14,12 +24,14 @@ interface ThreadCardProps {
     id: string;
     name: string;
     image: string;
+    username: string;
   };
   community: {
     id: string;
     name: string;
     image: string;
   } | null;
+  editedAt: string;
   createdAt: string;
   comments: {
     author: {
@@ -39,6 +51,7 @@ const ThreadCard = ({
   createdAt,
   comments,
   isComment,
+  editedAt,
 }: ThreadCardProps) => {
   return (
     <article
@@ -69,14 +82,29 @@ const ThreadCard = ({
               href={`/profile/${author.id}`}
               className="w-fit"
             >
-              <h4 className="cursor-pointer text-base-semibold text-light-1">
+              <div className="cursor-pointer text-base-semibold text-light-1">
                 {author.name}
-              </h4>
+                {"  "}
+                <span className="text-sm text-light-4">
+                  @{author.username}
+                </span>
+
+                <span className="text-sm text-light-4">
+                  {" · "}
+                  {timeSinceLastPost(createdAt)}
+                </span>
+              </div>
             </Link>
 
             <p className="mt-2 text-small-regular text-light-2">
               {content}
             </p>
+
+            {editedAt && (
+              <p className="mt-2 text-subtle-medium text-gray-1 font-style: italic">
+                Last edit - {formatDateString(editedAt)}
+              </p>
+            )}
 
             <div
               className={`${
@@ -134,6 +162,14 @@ const ThreadCard = ({
           authorId={author.id}
           parentId={parentId}
           isComment={isComment}
+        />
+
+        <EditThread
+          threadId={JSON.stringify(id)}
+          currentUserImg={author.image}
+          currentUserId={currentUserId}
+          authorId={author.id}
+          content={content}
         />
       </div>
 

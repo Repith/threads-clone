@@ -18,9 +18,9 @@ const threadSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  reaction: {
-    type: String,
-    default: 0,
+  editedAt: {
+    type: Date,
+    default: null,
   },
   parentId: {
     type: String,

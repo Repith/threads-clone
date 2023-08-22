@@ -82,28 +82,27 @@ export const fetchCommunityPosts = async (id: string) => {
     connectToDB();
 
     const communityPosts = await Community.findById(id)
-      .sort({ createdAt: "descending" })
-      .populate({
-        path: "threads",
-        model: Thread,
-        options: { sort: { createdAt: "desc" } },
-        populate: [
-          {
+    .populate({
+      path: "threads",
+      model: Thread,
+      options: { sort: { createdAt: "desc" } },
+      populate: [
+        {
+          path: "author",
+          model: User,
+          select: "name image id", // Select the "name" and "_id" fields from the "User" model
+        },
+        {
+          path: "children",
+          model: Thread,
+          populate: {
             path: "author",
             model: User,
-            select: "name image id", // Select the "name" and "_id" fields from the "User" model
+            select: "image _id", // Select the "name" and "_id" fields from the "User" model
           },
-          {
-            path: "children",
-            model: Thread,
-            populate: {
-              path: "author",
-              model: User,
-              select: "image _id", // Select the "name" and "_id" fields from the "User" model
-            },
-          },
-        ],
-      });
+        },
+      ],
+    });
 
     return communityPosts;
   } catch (error) {

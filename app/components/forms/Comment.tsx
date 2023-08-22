@@ -3,7 +3,7 @@
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import { CommentValidation } from "@/lib/validations/thread";
 import { addCommentToThread } from "@/lib/actions/thread.actions";
@@ -30,7 +30,6 @@ const Comment = ({
   currentUserImg,
   currentUserId,
 }: CommentProps) => {
-  const router = useRouter();
   const pathname = usePathname();
 
   const form = useForm({

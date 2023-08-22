@@ -41,7 +41,7 @@ const Searchbar = ({ routeType }: Props) => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder={`${
-          routeType !== "/search"
+          routeType !== "search"
             ? "Search communities"
             : "Search creators"
         }`}

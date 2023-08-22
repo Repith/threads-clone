@@ -106,7 +106,7 @@ export const fetchThreadById = async (id: string) => {
       .populate({
         path: "author",
         model: User,
-        select: "_id id name image",
+        select: "_id id name image username",
       })
       .populate({
         path: "children",
@@ -114,7 +114,7 @@ export const fetchThreadById = async (id: string) => {
           {
             path: "author",
             model: User,
-            select: "_id id name parentId image",
+            select: "_id id name parentId image username",
           },
           {
             path: "children",
@@ -122,7 +122,7 @@ export const fetchThreadById = async (id: string) => {
             populate: {
               path: "author",
               model: User,
-              select: "_id id name parentId image",
+              select: "_id id name parentId image username",
             },
           },
         ],
@@ -259,6 +259,35 @@ export const deleteThread = async (
   } catch (error: any) {
     throw new Error(
       `Failed to delete thread: ${error.message}`
+    );
+  }
+};
+
+export const editThread = async (
+  threadId: string,
+  editedText: string
+): Promise<{ status: number }> => {
+  connectToDB();
+
+  try {
+    // Find the original thread by ID
+    const originalThread = await Thread.findById(threadId);
+
+    if (!originalThread) {
+      throw new Error("Thread not found");
+    }
+
+    // Update the text and editedAt of the original thread
+    originalThread.text = editedText;
+    originalThread.editedAt = Date.now();
+
+    // Save the updated thread
+    await originalThread.save();
+
+    return { status: 200 }; // Success status
+  } catch (error: any) {
+    throw new Error(
+      `Error editing the thread: ${error.message}`
     );
   }
 };

@@ -3,9 +3,5 @@
 
 
 
-- created Pagination | CommunityCard component
-- created Community page, and Communities search page
-- added Alert Dialog from shadcnUI
-- added Threads delete functionality
-- updated proper importing pattern
-- updated for proper threads sorting
+- created thread Edit option with a mark for every edited post
+- created function that shows time of post creation
