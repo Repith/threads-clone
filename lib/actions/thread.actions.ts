@@ -266,7 +266,7 @@ export const deleteThread = async (
 export const editThread = async (
   threadId: string,
   editedText: string
-): Promise<{ status: number }> => {
+) => {
   connectToDB();
 
   try {
@@ -283,8 +283,6 @@ export const editThread = async (
 
     // Save the updated thread
     await originalThread.save();
-
-    return { status: 200 }; // Success status
   } catch (error: any) {
     throw new Error(
       `Error editing the thread: ${error.message}`

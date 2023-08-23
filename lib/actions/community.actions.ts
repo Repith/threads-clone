@@ -7,6 +7,7 @@ import { connectToDB } from "@/lib/mongoose";
 import Community from "@/lib/models/community.model";
 import Thread from "@/lib/models/thread.model";
 import User from "@/lib/models/user.model";
+import Reaction from "@/lib/models/reaction.model";
 
 export const createCommunity = async (
   id: string,

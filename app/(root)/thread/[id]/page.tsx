@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import { currentUser } from "@clerk/nextjs";
-import Link from "next/link";
 
 import { fetchUser } from "@/lib/actions/users.actions";
 import { fetchThreadById } from "@/lib/actions/thread.actions";
@@ -26,19 +25,17 @@ const ThreadPage = async ({
   return (
     <section className="relative">
       <div>
-        <Link href={`/thread/${thread._id}`}>
-          <ThreadCard
-            id={thread._id}
-            currentUserId={user.id}
-            parentId={thread.parentId}
-            content={thread.text}
-            author={thread.author}
-            community={thread.community}
-            createdAt={thread.createdAt}
-            comments={thread.children}
-            editedAt={thread.editedAt}
-          />
-        </Link>
+        <ThreadCard
+          id={thread._id}
+          currentUserId={user.id}
+          parentId={thread.parentId}
+          content={thread.text}
+          author={thread.author}
+          community={thread.community}
+          createdAt={thread.createdAt}
+          comments={thread.children}
+          editedAt={thread.editedAt}
+        />
       </div>
 
       <div className="mt-7">

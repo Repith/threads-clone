@@ -8,6 +8,7 @@ import { connectToDB } from "@/lib/mongoose";
 import User from "@/lib/models/user.model";
 import Thread from "@/lib/models/thread.model";
 import Community from "@/lib/models/community.model";
+import Reaction from "../models/reaction.model";
 
 interface updateUserProps {
   userId: string;
@@ -73,7 +74,8 @@ export const fetchUserPosts = async (userId: string) => {
     //Find all threads that the user has posted in
     const threads = await User.findOne({
       id: userId,
-    }).populate({
+    })
+    .populate({
       path: "threads",
       model: Thread,
       options: { sort: { createdAt: "desc" } },

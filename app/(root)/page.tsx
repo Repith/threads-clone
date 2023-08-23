@@ -6,6 +6,7 @@ import { fetchPosts } from "@/lib/actions/thread.actions";
 import { fetchUser } from "@/lib/actions/users.actions";
 
 import ThreadCard from "@/app/components/cards/ThreadCard";
+import React from "react";
 
 const Home = async () => {
   const result = await fetchPosts(1, 30);
@@ -25,7 +26,12 @@ const Home = async () => {
         ) : (
           <>
             {result.posts.map((post) => (
-              <Link href={`/thread/${post._id}`}>
+              <Link
+                href={`/thread/${post._id}`}
+                key={post._id}
+                passHref
+                legacyBehavior
+              >
                 <ThreadCard
                   key={post._id}
                   id={post._id}

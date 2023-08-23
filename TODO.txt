@@ -3,5 +3,3 @@
 
 
 
-- created thread Edit option with a mark for every edited post
-- created function that shows time of post creation
