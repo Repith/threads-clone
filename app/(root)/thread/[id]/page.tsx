@@ -22,12 +22,15 @@ const ThreadPage = async ({
 
   const thread = await fetchThreadById(params.id);
 
+  console.log(thread);
+
   return (
     <section className="relative">
       <div>
         <ThreadCard
           id={thread._id}
           currentUserId={user.id}
+          reactionUserId={userInfo._id}
           parentId={thread.parentId}
           content={thread.text}
           author={thread.author}
@@ -35,6 +38,7 @@ const ThreadPage = async ({
           createdAt={thread.createdAt}
           comments={thread.children}
           editedAt={thread.editedAt}
+          reactions={thread.reactions}
         />
       </div>
 
@@ -52,6 +56,7 @@ const ThreadPage = async ({
             key={childItem._id}
             id={childItem._id}
             currentUserId={user.id}
+            reactionUserId={userInfo._id}
             parentId={childItem.parentId}
             content={childItem.text}
             author={childItem.author}
@@ -59,6 +64,7 @@ const ThreadPage = async ({
             createdAt={childItem.createdAt}
             comments={childItem.children}
             editedAt={childItem.editedAt}
+            reactions={childItem.reactions}
             isComment
           />
         ))}

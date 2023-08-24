@@ -16,6 +16,8 @@ const Home = async () => {
   const userInfo = await fetchUser(user.id);
   if (!userInfo?.onboarded) redirect("/onboarding");
 
+  console.log(result);
+
   return (
     <>
       <h1 className="head-text text-left">Home</h1>
@@ -26,25 +28,29 @@ const Home = async () => {
         ) : (
           <>
             {result.posts.map((post) => (
-              <Link
-                href={`/thread/${post._id}`}
+              // <Link
+              //   href={`/thread/${post._id}`}
+              //   key={post._id}
+              //   passHref
+              //   legacyBehavior
+              // >
+
+              <ThreadCard
                 key={post._id}
-                passHref
-                legacyBehavior
-              >
-                <ThreadCard
-                  key={post._id}
-                  id={post._id}
-                  currentUserId={user.id}
-                  parentId={post.parentId}
-                  content={post.text}
-                  author={post.author}
-                  community={post.community}
-                  createdAt={post.createdAt}
-                  comments={post.children}
-                  editedAt={post.editedAt}
-                />
-              </Link>
+                id={post._id}
+                currentUserId={user.id}
+                reactionUserId={userInfo._id}
+                parentId={post.parentId}
+                content={post.text}
+                author={post.author}
+                community={post.community}
+                createdAt={post.createdAt}
+                comments={post.children}
+                editedAt={post.editedAt}
+                reactions={post.reactions}
+              />
+
+              // </Link>
             ))}
           </>
         )}

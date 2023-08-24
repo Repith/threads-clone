@@ -7,6 +7,7 @@ import { connectToDB } from "@/lib/mongoose";
 import Thread from "@/lib/models/thread.model";
 import User from "@/lib/models/user.model";
 import Community from "@/lib/models/community.model";
+import Reaction from "@/lib/models/reaction.model";
 
 interface createThreadParams {
   text: string;
@@ -71,6 +72,10 @@ export const fetchPosts = async (
     .sort({ createdAt: "desc" })
     .skip(skipAmount)
     .limit(pageSize)
+    .populate({
+      path: "reactions",
+      model: Reaction,
+    })
     .populate({ path: "author", model: User })
     .populate({
       path: "community",
@@ -81,7 +86,7 @@ export const fetchPosts = async (
       populate: {
         path: "author", // Populate the author field within children
         model: User,
-        select: "_id name parentId image", // Select only _id and username fields of the author
+        select: "_id name parentId image",
       },
     });
 
@@ -107,6 +112,10 @@ export const fetchThreadById = async (id: string) => {
         path: "author",
         model: User,
         select: "_id id name image username",
+      })
+      .populate({
+        path: "reactions",
+        model: Reaction,
       })
       .populate({
         path: "children",

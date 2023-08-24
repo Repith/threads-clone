@@ -18,6 +18,12 @@ const threadSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  reactions: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Reaction",
+    },
+  ],
   editedAt: {
     type: Date,
     default: null,

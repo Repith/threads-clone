@@ -44,6 +44,11 @@ interface ThreadCardProps {
     };
   }[];
   isComment?: boolean;
+  reactionUserId: string;
+  reactions: {
+    user: string;
+    thread: string;
+  }[];
 }
 
 const ThreadCard = ({
@@ -57,6 +62,8 @@ const ThreadCard = ({
   comments,
   isComment,
   editedAt,
+  reactionUserId,
+  reactions,
 }: ThreadCardProps) => {
   return (
     <>
@@ -159,10 +166,35 @@ const ThreadCard = ({
                 } mt-5 flex flex-col gap-3`}
               >
                 <div className="flex gap-3.5 text-light-4 text-sm">
+                  <div className="flex flex-row items-center hover:bg-slate-500 hover:bg-opacity-10 rounded-full px-2 py-1 ">
+                    {reactions.length > 0 &&
+                    reactions.some(
+                      (reaction) =>
+                        JSON.stringify(reaction.user) ===
+                        JSON.stringify(reactionUserId)
+                    ) ? (
+                      <Image
+                        src="/assets/heart-filled.svg"
+                        alt="heart"
+                        width={24}
+                        height={24}
+                        className="cursor-pointer object-contain"
+                      />
+                    ) : (
+                      <ReactionButton
+                        threadId={JSON.stringify(id)}
+                        userId={JSON.stringify(
+                          reactionUserId
+                        )}
+                      />
+                    )}
+                    {reactions.length}
+                  </div>
                   <ReactionButton
                     threadId={JSON.stringify(id)}
-                    authorId={currentUserId}
+                    userId={JSON.stringify(reactionUserId)}
                   />
+
                   <Link
                     href={`/thread/${id}`}
                     className="flex flex-row items-center hover:bg-slate-500 hover:bg-opacity-10 rounded-full px-2 py-1 "

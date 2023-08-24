@@ -22,6 +22,12 @@ const userSchema = new mongoose.Schema({
       ref: "Thread",
     },
   ],
+  reactions: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Reaction",
+    },
+  ],
   onboarded: {
     type: Boolean,
     default: false,

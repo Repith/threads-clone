@@ -14,7 +14,7 @@ const reactionSchema = new mongoose.Schema({
 });
 
 const Reaction =
-  mongoose.model("Reaction", reactionSchema) ||
-  mongoose.models.Reaction;
+  mongoose.models.Reaction ||
+  mongoose.model("Reaction", reactionSchema);
 
 export default Reaction;
