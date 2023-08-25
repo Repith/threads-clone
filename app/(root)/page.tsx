@@ -36,8 +36,8 @@ const Home = async () => {
                 author={post.author}
                 community={post.community}
                 createdAt={post.createdAt}
-                comments={post.children}
                 editedAt={post.editedAt}
+                comments={post.children}
                 reactions={post.reactions}
               />
             ))}

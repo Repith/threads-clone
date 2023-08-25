@@ -75,6 +75,7 @@ const ProfilePage = async ({
               <ThreadsTab
                 currentUserId={user.id}
                 accountId={userInfo.id}
+                reactionUserId={userInfo._id}
                 accountType="User"
               />
             </TabsContent>

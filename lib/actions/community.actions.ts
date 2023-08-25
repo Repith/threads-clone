@@ -23,8 +23,6 @@ export const createCommunity = async (
     // Find the user with the provided unique id
     const user = await User.findOne({ id: createdById });
 
-    console.log(user);
-
     if (!user) {
       throw new Error("User not found"); // Handle the case if the user with the id is not found
     }
@@ -105,6 +103,10 @@ export const fetchCommunityPosts = async (id: string) => {
               model: User,
               select: "image _id", // Select the "name" and "_id" fields from the "User" model
             },
+          },
+          {
+            path: "reactions",
+            model: Reaction,
           },
         ],
       });

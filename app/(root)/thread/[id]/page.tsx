@@ -22,8 +22,6 @@ const ThreadPage = async ({
 
   const thread = await fetchThreadById(params.id);
 
-  console.log(thread);
-
   return (
     <section className="relative">
       <div>

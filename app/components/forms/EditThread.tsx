@@ -89,9 +89,7 @@ const EditThread = ({
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>
-              Are you absolutely sure?
-            </AlertDialogTitle>
+            <AlertDialogTitle>Edit thread</AlertDialogTitle>
 
             <Form {...form}>
               <form

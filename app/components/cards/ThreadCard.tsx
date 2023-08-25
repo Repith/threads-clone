@@ -19,6 +19,14 @@ import { Button } from "@/components/ui/button";
 
 import { userReaction } from "@/lib/actions/reaction.actions";
 import ReactionButton from "../forms/ReactionButton";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { MoreHorizontal } from "lucide-react";
 
 interface ThreadCardProps {
   id: string;

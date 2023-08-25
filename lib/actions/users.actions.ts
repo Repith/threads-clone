@@ -74,8 +74,7 @@ export const fetchUserPosts = async (userId: string) => {
     //Find all threads that the user has posted in
     const threads = await User.findOne({
       id: userId,
-    })
-    .populate({
+    }).populate({
       path: "threads",
       model: Thread,
       options: { sort: { createdAt: "desc" } },
@@ -93,6 +92,10 @@ export const fetchUserPosts = async (userId: string) => {
             model: User,
             select: "name image id username",
           },
+        },
+        {
+          path: "reactions",
+          model: Reaction,
         },
       ],
     });

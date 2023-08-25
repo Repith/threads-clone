@@ -27,6 +27,10 @@ interface Result {
     } | null;
     createdAt: string;
     editedAt: string;
+    reactions: {
+      user: string;
+      thread: string;
+    }[];
     children: {
       author: {
         image: string;
@@ -39,12 +43,14 @@ interface ThreadsTabProps {
   currentUserId: string;
   accountId: string;
   accountType: string;
+  reactionUserId: string;
 }
 
 const ThreadsTab = async ({
   currentUserId,
   accountId,
   accountType,
+  reactionUserId,
 }: ThreadsTabProps) => {
   let result: Result;
 
@@ -64,6 +70,7 @@ const ThreadsTab = async ({
           key={thread._id}
           id={thread._id}
           currentUserId={currentUserId}
+          reactionUserId={reactionUserId}
           parentId={thread.parentId}
           content={thread.text}
           author={
@@ -93,6 +100,7 @@ const ThreadsTab = async ({
           createdAt={thread.createdAt}
           editedAt={thread.editedAt}
           comments={thread.children}
+          reactions={thread.reactions}
         />
       ))}
     </section>
