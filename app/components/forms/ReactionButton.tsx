@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react"; // Import useState
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 import { userReaction } from "@/lib/actions/reaction.actions";
@@ -8,20 +8,22 @@ import { userReaction } from "@/lib/actions/reaction.actions";
 interface ReactionButtonProps {
   threadId: string;
   userId: string;
+  isReacted?: boolean;
 }
 
 const ReactionButton = ({
   threadId,
   userId,
+  isReacted,
 }: ReactionButtonProps) => {
-  const [hasReacted, setHasReacted] = useState(false); // Initialize state
+  const [hasReacted, setHasReacted] = useState(isReacted);
 
   const handleReaction = async () => {
     await userReaction({
       userId,
       threadId,
     });
-    setHasReacted(true); // Update state when reaction is added
+    setHasReacted(!hasReacted);
   };
 
   return (
@@ -36,7 +38,7 @@ const ReactionButton = ({
         width={24}
         height={24}
         className="cursor-pointer object-contain"
-        onClick={handleReaction} // Use the updated handleReaction function
+        onClick={handleReaction}
       />
     </>
   );

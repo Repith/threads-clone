@@ -165,7 +165,7 @@ const ThreadCard = ({
                   isComment && "mb-10"
                 } mt-5 flex flex-col gap-3`}
               >
-                <div className="flex gap-3.5 text-light-4 text-sm">
+                <div className="flex gap-3 text-light-4 text-sm">
                   <div className="flex flex-row items-center hover:bg-slate-500 hover:bg-opacity-10 rounded-full px-2 py-1 ">
                     {reactions.length > 0 &&
                     reactions.some(
@@ -173,27 +173,28 @@ const ThreadCard = ({
                         JSON.stringify(reaction.user) ===
                         JSON.stringify(reactionUserId)
                     ) ? (
-                      <Image
-                        src="/assets/heart-filled.svg"
-                        alt="heart"
-                        width={24}
-                        height={24}
-                        className="cursor-pointer object-contain"
+                      <ReactionButton
+                        key={id}
+                        threadId={JSON.stringify(id)}
+                        userId={JSON.stringify(
+                          reactionUserId
+                        )}
+                        isReacted
                       />
                     ) : (
                       <ReactionButton
+                        key={id}
                         threadId={JSON.stringify(id)}
                         userId={JSON.stringify(
                           reactionUserId
                         )}
                       />
                     )}
-                    {reactions.length}
+                    <p className="text-small-regular">
+                      {reactions.length > 0 &&
+                        reactions.length}
+                    </p>
                   </div>
-                  <ReactionButton
-                    threadId={JSON.stringify(id)}
-                    userId={JSON.stringify(reactionUserId)}
-                  />
 
                   <Link
                     href={`/thread/${id}`}
@@ -206,7 +207,10 @@ const ThreadCard = ({
                       height={24}
                       className="cursor-pointer object-contain"
                     />
-                    {comments.length > 0 && comments.length}
+                    <p className="text-small-regular">
+                      {comments.length > 0 &&
+                        comments.length}
+                    </p>
                   </Link>
                   <Image
                     src="/assets/repost.svg"
