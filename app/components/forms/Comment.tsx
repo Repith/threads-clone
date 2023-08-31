@@ -50,6 +50,7 @@ const Comment = ({
     );
 
     form.reset();
+    window.location.reload();
   };
 
   return (

@@ -16,21 +16,19 @@ const ReactionButton = ({
   userId,
   isReacted,
 }: ReactionButtonProps) => {
-  const [hasReacted, setHasReacted] = useState(isReacted);
-
   const handleReaction = async () => {
     await userReaction({
       userId,
       threadId,
     });
-    setHasReacted(!hasReacted);
+    window.location.reload();
   };
 
   return (
     <>
       <Image
         src={
-          hasReacted
+          isReacted
             ? "/assets/heart-filled.svg"
             : "/assets/heart-gray.svg"
         }
