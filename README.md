@@ -1,34 +1,71 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# <img src="https://github.com/Repith/threads-clone/blob/main/public/logo.svg" width=25px height=auto alt="Logo"> ThreadsClone 
+
+
+
+Application based on the popular Threads platform that allows to share thoughts, ideas and opinions. 
+
+
+## Features
+
+- allows users to create posts, comments and react to content
+- via Clerk Organization connects people into communities
+
+
+## Tech Stack
+
+**Client:** React, Next.js, TailwindCSS, shadcn/ui
+
+**Database:** MongoDB
+
+**Other:** Clerk with organizations
+
+## Demo
+
+Try it: https://threads-clone-git-main-repith.vercel.app
+
+
+## Installation
 
 First, run the development server:
 
+```bash 
+  npm install
+```
+Open your broweser and by default server should run on http://localhost:3000.
+
+Configure your **.env** file with your own keys from Clerk, MongoDB and Uploadthing.
+
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+# Environment Variables
+# Clerk
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+NEXT_CLERK_WEBHOOK_
+
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/onboarding
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+
+# MongoDB
+MONGODB_URL=
+
+# Uploadthing
+UPLOADTHING_SECRET=
+UPLOADTHING_APP_ID=
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Login via Clerk authentication and join your own community!
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Screenshots
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+![Main](https://github.com/Repith/Repith/blob/main/public/Threads/main.png)
+![User profile](https://github.com/Repith/Repith/blob/main/public/Threads/profile.png)
+![Comments and reactions](https://github.com/Repith/Repith/blob/main/public/Threads/comments.png)
+![Responsivness](https://github.com/Repith/Repith/blob/main/public/Threads/responsive.png)
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## Credits
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Special thanks to [Adrian Hajdin - JS Mastery](https://github.com/adrianhajdin) for this [project](https://github.com/adrianhajdin/threads) I co-coded :star: 
