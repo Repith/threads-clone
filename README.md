@@ -1,5 +1,5 @@
 
-# <img src="https://github.com/Repith/threads-clone/blob/main/public/logo.svg" width=25px height=auto alt="Logo"> ThreadsClone 
+# <img src="https://github.com/Repith/threads-clone/blob/main/public/logo.svg" width=30px height=auto alt="Logo"> ThreadsClone 
 
 
 
@@ -22,17 +22,18 @@ Application based on the popular Threads platform that allows to share thoughts,
 
 ## Demo
 
-Try it: https://threads-clone-git-main-repith.vercel.app
+Try here: https://threads-clone-git-main-repith.vercel.app
 
 
 ## Installation
 
-First, run the development server:
+First, to run the development server use your package manager to install packets: (f.e. npm)
 
 ```bash 
   npm install
+  npm run dev
 ```
-Open your broweser and by default server should run on http://localhost:3000.
+Open your browser and by default server should run on http://localhost:3000.
 
 Configure your **.env** file with your own keys from Clerk, MongoDB and Uploadthing.
 
